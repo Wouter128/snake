@@ -1,6 +1,7 @@
 import java.util.Random;
 
 public class Food {
+
     private static final int WIDTH = 10;
     private static final int HEIGHT = 10;
     private final int xPos;

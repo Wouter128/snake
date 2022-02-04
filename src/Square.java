@@ -1,4 +1,5 @@
 public class Square {
+
     private static final int WIDTH = 10;
     private static final int HEIGHT = 10;
     private int xPos;
