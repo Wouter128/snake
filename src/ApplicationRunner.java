@@ -9,8 +9,8 @@ import java.util.List;
 public class ApplicationRunner extends JPanel implements ActionListener, KeyListener {
 
     private int delay = 100;
+    private static final int DELAY_INTERVAL = 3;
     private Timer timer;
-
     private Game game;
     
     public static void main(String[] args) {
@@ -57,6 +57,11 @@ public class ApplicationRunner extends JPanel implements ActionListener, KeyList
     @Override
     public void actionPerformed (ActionEvent e){
         if (!game.isGameOver()) {
+            if (game.foodEaten()) {
+                delay -= DELAY_INTERVAL;
+                timer.setDelay(delay);
+                game.createFood();
+            }
             game.checkCollision();
             game.moveSnake();
             repaint();

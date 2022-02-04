@@ -70,13 +70,15 @@ public class Game {
         }
     }
 
-    public void checkCollision() {
+    public boolean foodEaten() {
         if (snake.getHead().getxPos() == food.getxPos() && snake.getHead().getyPos() == food.getyPos()) {
             snake.growTail();
-            createFood();
-//            delay -= 3;
-//            timer.setDelay(delay);
+            return true;
         }
+        return false;
+    }
+
+    public void checkCollision() {
         if (snake.getHead().getxPos() < Border.getxPos() ||
                 snake.getHead().getyPos() < Border.getyPos() ||
                 snake.getHead().getxPos() + 10 > Border.getxPos() + Border.getWidth() ||
