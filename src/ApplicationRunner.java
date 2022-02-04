@@ -12,6 +12,8 @@ public class ApplicationRunner extends JPanel implements ActionListener, KeyList
     private static final int DELAY_INTERVAL = 3;
     private Timer timer;
     private Game game;
+
+    private JLabel scoreLabel;
     
     public static void main(String[] args) {
         ApplicationRunner applicationRunner = new ApplicationRunner();
@@ -22,7 +24,12 @@ public class ApplicationRunner extends JPanel implements ActionListener, KeyList
         game = new Game();
 
         JFrame frame = new JFrame("### SNAKE ###");
-        frame.getContentPane().add(this);
+
+        Container pane = frame.getContentPane();
+        pane.setLayout(new BorderLayout());
+        scoreLabel = new JLabel("Score: " + game.getScore());
+        pane.add(scoreLabel, BorderLayout.NORTH);
+        pane.add(this, BorderLayout.CENTER);
         frame.setSize(450, 450);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
@@ -58,6 +65,7 @@ public class ApplicationRunner extends JPanel implements ActionListener, KeyList
     public void actionPerformed (ActionEvent e){
         if (!game.isGameOver()) {
             if (game.foodEaten()) {
+                scoreLabel.setText("Score: " + game.getScore());
                 delay -= DELAY_INTERVAL;
                 timer.setDelay(delay);
                 game.createFood();

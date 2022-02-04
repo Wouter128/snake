@@ -3,6 +3,9 @@ public class Game {
     private final Snake snake;
     private Food food;
 
+    private int score;
+    private final static int POINTS = 10;
+
     private static final int SIZE_TO_MOVE = 10;
     private boolean up = false;
     private boolean down = false;
@@ -17,6 +20,7 @@ public class Game {
         gameOver = false;
         food = new Food();
         direction = "right";
+        score = 0;
     }
 
     public Snake getSnake() {
@@ -29,6 +33,10 @@ public class Game {
 
     public void createFood() {
         food = new Food();
+    }
+
+    public int getScore() {
+        return score;
     }
 
     public boolean isGameOver() {
@@ -73,6 +81,7 @@ public class Game {
     public boolean foodEaten() {
         if (snake.getHead().getxPos() == food.getxPos() && snake.getHead().getyPos() == food.getyPos()) {
             snake.growTail();
+            score += POINTS;
             return true;
         }
         return false;
