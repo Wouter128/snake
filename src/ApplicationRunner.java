@@ -9,12 +9,13 @@ import java.util.List;
 public class ApplicationRunner extends JPanel implements ActionListener, KeyListener {
 
     private int delay = 100;
-    private static final int DELAY_INTERVAL = 3;
+    private static final int DELAY_INTERVAL = 1;
     private Timer timer;
     private Game game;
 
     private JLabel scoreLabel;
-    
+    private JLabel delayLabel;
+
     public static void main(String[] args) {
         ApplicationRunner applicationRunner = new ApplicationRunner();
         applicationRunner.initBoard();
@@ -28,10 +29,14 @@ public class ApplicationRunner extends JPanel implements ActionListener, KeyList
         Container pane = frame.getContentPane();
         pane.setLayout(new BorderLayout());
         scoreLabel = new JLabel("Score: " + game.getScore());
+        delayLabel = new JLabel("Delay: " + delay);
         pane.add(scoreLabel, BorderLayout.NORTH);
         pane.add(this, BorderLayout.CENTER);
+        pane.add(delayLabel, BorderLayout.SOUTH);
         frame.setSize(450, 450);
+        frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
 
         frame.addKeyListener(this);
@@ -67,6 +72,7 @@ public class ApplicationRunner extends JPanel implements ActionListener, KeyList
             if (game.foodEaten()) {
                 scoreLabel.setText("Score: " + game.getScore());
                 delay -= DELAY_INTERVAL;
+                delayLabel.setText("Delay: " + delay);
                 timer.setDelay(delay);
                 game.createFood();
             }
